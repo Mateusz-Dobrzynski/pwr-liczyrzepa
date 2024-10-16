@@ -1,0 +1,11 @@
+{
+    "url": "https://test.com",
+    "unit": "zł",
+    "name": "test",
+    "records": [
+        {
+            "timestamp": 2137,
+            "value": 2137
+        }
+    ]
+}
