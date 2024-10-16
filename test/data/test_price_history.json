@@ -2,6 +2,7 @@
     "url": "https://test.com",
     "unit": "zł",
     "name": "test",
+    "xpath": "//div[@class='test']",
     "records": [
         {
             "timestamp": 2137,

@@ -2,7 +2,8 @@ import json
 
 from liczyrzepa.types import PriceHistory, PriceRecord
 from datetime import datetime
-import os.path
+
+from liczyrzepa.web_scraper import WebScraper
 
 
 class PriceTracker:
@@ -26,6 +27,7 @@ class PriceTracker:
         price_history.records = self._parse_raw_price_records(
             raw_price_history["records"]
         )
+        price_history.xpath = raw_price_history["xpath"]
         return price_history
 
     def _parse_raw_price_records(self, raw_records: list[dict]) -> list[PriceRecord]:
@@ -45,7 +47,16 @@ class PriceTracker:
         file.close()
         return json_file
 
-    def add_price_record(self, record: PriceRecord) -> None:
+    def get_current_price_record(self):
+        history = self.price_history
+        url = history.url
+        xpath = history.xpath
+        value = WebScraper().get_current_value(url, xpath)
+        current_timestamp = datetime.timestamp(datetime.now())
+        record = PriceRecord(current_timestamp, value)
+        self.add_price_record_to_history(record)
+
+    def add_price_record_to_history(self, record: PriceRecord) -> None:
         self.price_history.records.append(record)
 
     def save_to_file(self, history_file_path):

@@ -1,7 +1,7 @@
 from liczyrzepa.price_tracker import PriceTracker
 from datetime import datetime
 
-from liczyrzepa.types import PriceRecord
+from liczyrzepa.types import PriceHistory, PriceRecord
 
 
 class TestPriceTracker:
@@ -12,17 +12,18 @@ class TestPriceTracker:
 
         assert price_history.name == "test"
         assert price_history.unit == "zł"
+        assert price_history.xpath == "//div[@class='test']"
         assert price_history.url == "https://test.com"
         assert record.value == 2137
         assert record.time == datetime.fromtimestamp(2137)
 
-    def test_record_addition(self):
+    def test_adding_records_to_history(self):
         # GIVEN
         price_tracker = PriceTracker("test/data/test_price_history.json")
         record = PriceRecord(timestamp=115, value=225)
 
         # WHEN
-        price_tracker.add_price_record(record)
+        price_tracker.add_price_record_to_history(record)
 
         # THEN
         price_history = price_tracker.price_history
@@ -36,7 +37,7 @@ class TestPriceTracker:
         modified_history_path = "test/data/modified_price_history.json"
 
         # WHEN
-        price_tracker.add_price_record(new_record)
+        price_tracker.add_price_record_to_history(new_record)
         price_tracker.save_to_file(modified_history_path)
         modified_history = PriceTracker(modified_history_path).price_history
 

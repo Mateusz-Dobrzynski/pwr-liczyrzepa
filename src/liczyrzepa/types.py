@@ -22,6 +22,7 @@ class PriceHistory:
     unit: str
     name: str
     records: list[PriceRecord]
+    xpath: str
 
     def __init__(self) -> None:
         pass
@@ -36,4 +37,5 @@ class PriceHistory:
             "unit": self.unit,
             "name": self.name,
             "records": serialized_price_records,
+            "xpath": self.xpath,
         }
