@@ -1,0 +1,9 @@
+{
+    "name": "Black Monk – Munchkin Legends",
+    "url": "https://blackmonk.pl/munchkin/1110-munchkin-legendy.html",
+    "xpath": "//span[@class='product-price' and @itemprop='price']",
+    "unit": "zł",
+    "records": [
+        
+    ]
+}

@@ -27,7 +27,11 @@ class PriceHistory:
     records: list[PriceRecord]
     xpath: str
 
-    def __init__(self, path: str) -> None:
+    def __init__(self, path: str | None = None) -> None:
+        if path:
+            self.load(path)
+
+    def load(self, path: str):
         try:
             raw_price_history = self._read_json(path)
 
@@ -56,13 +60,13 @@ class PriceHistory:
         file.close()
         return json_file
 
+    def create_new_price_record(self):
+        self.records.append(self._get_current_price_record())
+
     def _get_current_price_record(self) -> PriceRecord:
         value = WebScraper().get_current_value(self.url, self.xpath)
         current_timestamp = datetime.timestamp(datetime.now())
         return PriceRecord(current_timestamp, value)
-
-    def append_price_record(self, record: PriceRecord) -> None:
-        self.records.append(record)
 
     def save_to_file(self, history_file_path):
         file = open(history_file_path, "w", encoding="utf-8")
