@@ -1,15 +1,16 @@
 import argparse
 from price_history import PriceHistory
 
-if __name__ == "__main__":
+
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--url", help="The URL of a website you want to monitor")
-    parser.add_argument("--unit", help="The unit of a measured values (e.g. $)")
+    parser.add_argument("--unit", help="The unit of a measured value (e.g. $)")
     parser.add_argument(
         "-x", "--xpath", help="The XPath leading to an element you want to monitor"
     )
     parser.add_argument(
-        "-f", "--file", help="Output file to which the presented value will be saved"
+        "-f", "--file", help="Output file to which the price history will be saved"
     )
     parser.add_argument(
         "-v",
@@ -17,12 +18,51 @@ if __name__ == "__main__":
         help="Prints a current value of an element specified with --xpath found on a website specified with --url",
         action="store_true",
     )
+    parser.add_argument(
+        "-g",
+        "--graph",
+        help="Generate a graph of the price history",
+        action="store_true",
+    )
+    parser.add_argument(
+        "-s",
+        "--spreadsheet",
+        "Path of a spreadsheet file to which the price history will be exported",
+    )
+    parser.add_argument("-r", "--read", help="Path of a price history input file")
     parser.add_argument
     args = parser.parse_args()
 
+    if not args.read:
+        history = create_price_history_from(args)
+    else:
+        history = PriceHistory(args.read)
+
     if args.value:
-        history = PriceHistory()
+        if not args.url or not args.xpath:
+            print(
+                'URL and Xpath are required to determine a value. Use "liczyrzepa --help" for more information'
+            )
+            exit(1)
         history.create_new_price_record()
         print(history.records[-1].value)
         if args.file:
             history.save_to_file(args.file)
+
+    if args.file:
+        history.save_to_file(args.file)
+
+
+def create_price_history_from(args) -> PriceHistory:
+    history = PriceHistory()
+    if args.url:
+        history.url = args.url
+    if args.xpath:
+        history.xpath = args.xpath
+    if args.unit:
+        history.unit = args.unit
+    return history
+
+
+if __name__ == "__main__":
+    main()

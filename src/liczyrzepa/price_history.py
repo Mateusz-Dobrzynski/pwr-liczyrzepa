@@ -13,6 +13,7 @@ class PriceHistory:
     xpath: str
 
     def __init__(self, path: str | None = None) -> None:
+        self.records = []
         if path:
             self.load(path)
 
