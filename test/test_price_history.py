@@ -1,6 +1,7 @@
 from datetime import datetime
 
-from liczyrzepa.types import PriceHistory, PriceRecord
+from src.liczyrzepa.price_history import PriceHistory
+from src.liczyrzepa.price_record import PriceRecord
 
 
 class TestPriceHistory:
