@@ -2,6 +2,7 @@ from datetime import datetime
 
 from src.liczyrzepa.price_history import PriceHistory
 from src.liczyrzepa.price_record import PriceRecord
+from test.price_history_factory import PriceHistoryFactory
 
 
 class TestPriceHistory:
@@ -40,3 +41,29 @@ class TestPriceHistory:
 
         # THEN
         assert len(price_history.records)
+
+    def test_times_array_creation(self):
+        # GIVEN
+        timestamps_input = [15, 20, 25.5]
+        history = PriceHistoryFactory().from_timestamps_array(timestamps_input)
+
+        # WHEN
+        timestamps_output = history.get_times()
+
+        # THEN
+        assert len(timestamps_input) == len(timestamps_output)
+        for i in range(len(timestamps_input)):
+            assert timestamps_input[i] == datetime.timestamp(timestamps_output[i])
+
+    def test_values_array_creation(self):
+        # GIVEN
+        values_input = [15, 20, 25.5]
+        history = PriceHistoryFactory().from_values_array(values_input)
+
+        # WHEN
+        values_output = history.get_values()
+
+        # THEN
+        assert len(values_output) == len(values_output)
+        for i in range(len(values_output)):
+            assert values_output[i] == values_output[i]

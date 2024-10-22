@@ -1,8 +1,8 @@
 from datetime import datetime
 import json
 
-from web_scraper import WebScraper
-from price_record import PriceRecord
+from .web_scraper import WebScraper
+from .price_record import PriceRecord
 
 
 class PriceHistory:
@@ -70,3 +70,15 @@ class PriceHistory:
             "records": serialized_price_records,
             "xpath": self.xpath,
         }
+
+    def get_times(self) -> list[datetime]:
+        timestamps_array = []
+        for record in self.records:
+            timestamps_array.append(record.time)
+        return timestamps_array
+
+    def get_values(self) -> list[float]:
+        values_array = []
+        for record in self.records:
+            values_array.append(record.value)
+        return values_array

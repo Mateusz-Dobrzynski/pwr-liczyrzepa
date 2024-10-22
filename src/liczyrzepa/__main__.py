@@ -1,4 +1,5 @@
 import argparse
+from liczyrzepa.spreadsheet_saver import SpreadsheetSaver
 from price_history import PriceHistory
 
 
@@ -51,6 +52,9 @@ def main():
 
     if args.file:
         history.save_to_file(args.file)
+
+    if args.spreadsheet():
+        SpreadsheetSaver().save_history_to_file(history, args.spreadsheet)
 
 
 def create_price_history_from(args) -> PriceHistory:
