@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "liczyrzepa"
+version = "0.0.1"
+authors = [
+  { name="Mateusz Dobrzyński" },
+]
+description = "A small example package"
+readme = "README.md"
+requires-python = ">=3.8"
+
+[project.urls]
+Homepage = "https://github.com/Mateusz-Dobrzynski/pwr-liczyrzepa"
+Issues = "https://github.com/Mateusz-Dobrzynski/pwr-liczyrzepa/issues"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+]
+pythonpath = [
+  "src/liczyrzepa", "src"
+]
