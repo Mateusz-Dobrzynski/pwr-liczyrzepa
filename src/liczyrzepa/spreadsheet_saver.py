@@ -1,4 +1,4 @@
-from liczyrzepa.price_history import PriceHistory
+from price_history import PriceHistory
 import pandas as pd
 
 

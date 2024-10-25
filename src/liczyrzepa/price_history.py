@@ -1,8 +1,8 @@
 from datetime import datetime
 import json
 
-from .web_scraper import WebScraper
-from .price_record import PriceRecord
+from web_scraper import WebScraper
+from price_record import PriceRecord
 
 
 class PriceHistory:
@@ -14,6 +14,9 @@ class PriceHistory:
 
     def __init__(self, path: str | None = None) -> None:
         self.records = []
+        self.url = ""
+        self.name = ""
+        self.unit = ""
         if path:
             self.load(path)
 
@@ -57,6 +60,7 @@ class PriceHistory:
     def save_to_file(self, history_file_path):
         file = open(history_file_path, "w", encoding="utf-8")
         file.write(json.dumps(self._to_json()))
+        file.close()
 
     def _to_json(self) -> dict:
         serialized_price_records = []

@@ -1,5 +1,5 @@
 from liczyrzepa.spreadsheet_saver import SpreadsheetSaver
-from test.price_history_factory import PriceHistoryFactory
+from .price_history_factory import PriceHistoryFactory
 import pandas as pd
 import os
 

@@ -1,5 +1,6 @@
 import argparse
-from liczyrzepa.spreadsheet_saver import SpreadsheetSaver
+from chart_creator import ChartCreator
+from spreadsheet_saver import SpreadsheetSaver
 from price_history import PriceHistory
 
 
@@ -20,15 +21,18 @@ def main():
         action="store_true",
     )
     parser.add_argument(
-        "-g",
-        "--graph",
-        help="Generate a graph of the price history",
+        "-i", "--image", help="Save a chart of the price history as an image"
+    )
+    parser.add_argument(
+        "-c",
+        "--chart",
+        help="Show an interactive chart of the price history",
         action="store_true",
     )
     parser.add_argument(
         "-s",
         "--spreadsheet",
-        "Path of a spreadsheet file to which the price history will be exported",
+        help="Path of a spreadsheet file to which the price history will be exported",
     )
     parser.add_argument("-r", "--read", help="Path of a price history input file")
     parser.add_argument
@@ -40,7 +44,7 @@ def main():
         history = PriceHistory(args.read)
 
     if args.value:
-        if not args.url or not args.xpath:
+        if not args.read and (not args.url or not args.xpath):
             print(
                 'URL and Xpath are required to determine a value. Use "liczyrzepa --help" for more information'
             )
@@ -53,8 +57,14 @@ def main():
     if args.file:
         history.save_to_file(args.file)
 
-    if args.spreadsheet():
+    if args.spreadsheet:
         SpreadsheetSaver().save_history_to_file(history, args.spreadsheet)
+
+    if args.image:
+        ChartCreator(history).save_chart_as_image(args.image)
+
+    if args.chart:
+        ChartCreator(history).show_interactive_chart()
 
 
 def create_price_history_from(args) -> PriceHistory:
