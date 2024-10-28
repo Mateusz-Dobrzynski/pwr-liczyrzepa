@@ -7,10 +7,6 @@ class SpreadsheetSaver:
         times = history.get_times()
         index = pd.DatetimeIndex(times)
         values = history.get_values()
-        input_dict = {}
-
-        for i in range(len(history.records)):
-            input_dict.update({"value": values[i]})
-
+        input_dict = {"value": values}
         frame = pd.DataFrame(input_dict, index)
         frame.to_excel(path)
