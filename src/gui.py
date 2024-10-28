@@ -6,6 +6,8 @@ from PIL import Image, ImageTk
 from datetime import datetime
 import os
 
+from spreadsheet_saver import SpreadsheetSaver
+
 
 class GUI:
     def __init__(self) -> None:
@@ -68,12 +70,20 @@ class GUI:
         price_history_creation_button.grid(row=row_number, column=1)
         row_number += 1
 
-        price_history_creation_button = Button(
+        price_history_save_to_json_button = Button(
             master=self.root,
-            text="Save as",
-            command=self.save_price_history_as,
+            text="Save to .json",
+            command=self.save_to_json,
         )
-        price_history_creation_button.grid(row=row_number, column=1)
+        price_history_save_to_json_button.grid(row=row_number, column=1)
+        row_number += 1
+
+        price_history_to_ods_button = Button(
+            master=self.root,
+            text="Save to .ods",
+            command=self.save_to_spreadsheet,
+        )
+        price_history_to_ods_button.grid(row=row_number, column=1)
         row_number += 1
 
         self.error_text = Text(self.root, height=3, width=30)
@@ -126,18 +136,25 @@ class GUI:
                 "Failed to create price history. Please check your URL and Xpath"
             )
 
-    def save_price_history_as(self) -> None:
+    def save_to_json(self) -> None:
         dialog = filedialog.asksaveasfilename(initialdir=".", defaultextension=".json")
         if not isinstance(self.history, PriceHistory):
             return
         self.history.save_to_file(dialog)
+
+    def save_to_spreadsheet(self) -> None:
+        dialog = filedialog.asksaveasfilename(initialdir=".", defaultextension=".ods")
+        if not isinstance(self.history, PriceHistory):
+            return
+        if not dialog.endswith(".ods"):
+            dialog += ".ods"
+        SpreadsheetSaver().save_history_to_file(self.history, dialog)
 
     def add_new_price_record_and_update_chart(self) -> None:
         if not isinstance(self.history, PriceHistory):
             return
         self.history.create_new_price_record()
         self.update_price_history_chart()
-        self.history.save_to_file(self.price_history_path)
 
     def update_price_history_chart(self):
         temp_image_path = str(datetime.timestamp(datetime.now())) + ".png"

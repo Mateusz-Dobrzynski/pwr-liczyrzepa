@@ -6,7 +6,8 @@ liczyrzepa is a simple command line tool for monitoring prices or other numerica
 
 - Scraping numerical values found on a website with specified URL and Xpath,
 - Storing name and unit associated with the scraped value,
-- Creating price histories that can be read and saved,
+- Creating price histories that can be saved and loaded,
+- Exporting price histories as spreadsheets,
 - A simple GUI allowing to perform these operations manually.
 
 ## Usage
