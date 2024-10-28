@@ -1,5 +1,6 @@
 import argparse
 from chart_creator import ChartCreator
+from gui import GUI
 from spreadsheet_saver import SpreadsheetSaver
 from price_history import PriceHistory
 
@@ -7,6 +8,9 @@ from price_history import PriceHistory
 def main():
     parser = construct_argument_parser()
     args = parser.parse_args()
+
+    if args.gui:
+        GUI().build()
 
     if not args.read:
         history = create_price_history_from(args)
@@ -64,6 +68,12 @@ def construct_argument_parser():
     )
     parser.add_argument(
         "-i", "--image", help="Save a chart of the price history as an image"
+    )
+    parser.add_argument(
+        "-g",
+        "--gui",
+        help="Open up GUI",
+        action="store_true",
     )
     parser.add_argument("-n", "--name", help="Name of the monitored value")
     parser.add_argument(
