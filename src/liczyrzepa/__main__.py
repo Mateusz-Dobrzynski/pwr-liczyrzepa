@@ -72,7 +72,7 @@ def construct_argument_parser():
     parser.add_argument(
         "-g",
         "--gui",
-        help="Open up GUI",
+        help="Opens up GUI. Doesn't require any additional arguments",
         action="store_true",
     )
     parser.add_argument("-n", "--name", help="Name of the monitored value")
