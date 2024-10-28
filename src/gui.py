@@ -139,12 +139,20 @@ class GUI:
     def save_to_json(self) -> None:
         dialog = filedialog.asksaveasfilename(initialdir=".", defaultextension=".json")
         if not isinstance(self.history, PriceHistory):
+            self.display_error(
+                "To save the price history, you must create or load it first!"
+            )
             return
+        if not dialog.endswith(".json"):
+            dialog += ".json"
         self.history.save_to_file(dialog)
 
     def save_to_spreadsheet(self) -> None:
         dialog = filedialog.asksaveasfilename(initialdir=".", defaultextension=".ods")
         if not isinstance(self.history, PriceHistory):
+            self.display_error(
+                "To export the price history, you must create or load it first!"
+            )
             return
         if not dialog.endswith(".ods"):
             dialog += ".ods"
