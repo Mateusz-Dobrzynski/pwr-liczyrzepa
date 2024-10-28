@@ -27,8 +27,8 @@ options:
                         Save the price history as a spreadsheet
   --url URL             The URL of a website you want to monitor
   --unit UNIT           The unit of a measured value (e.g. $)
-  -v, --value           Prints a current value of an element specified with --xpath found on a website specified with --url. If --write location was specified, this value will
-                        be appended to the price history
+  -v, --value           Prints a current value of an element specified with --xpath found on a website specified with --url.
+                        If --write location was specified, this value will be appended to the price history
   -w WRITE, --write WRITE
                         Write the price history as json to a specified location
   -x XPATH, --xpath XPATH
@@ -37,6 +37,6 @@ options:
 
 ## Name origin
 
-Liczyrzepa (Czech: _Krakonoš_) is a Polish name of a mythical spirit of the Giant Mountains (Polish: _Karkonosze_, Czech: _Krkonoše_). While the etymology of Liczyrzepa is not clear, a legend was created to explain the name origin. According to the legend, a princess of the city Świdnica (German: _Schweidnitz_) was kidnapped by Liczyrzepa, but she managed to escape by distracting him with an order to count turnips in the field. Hence the name Liczyrzepa (_liczyć_ – to count, _rzepa_ – turnip): "one who counts turnips".
+Liczyrzepa (Czech: _Krakonoš_) is a Polish name of a mythical spirit of the Giant Mountains (Polish: _Karkonosze_, Czech: _Krkonoše_). While the etymology of Liczyrzepa is not clear, a legend was created to explain the name origin. According to the legend, a princess of the city of Świdnica (German: _Schweidnitz_) was kidnapped by Liczyrzepa, but she managed to escape by distracting him with an order to count turnips in the field. Hence the name Liczyrzepa (_liczyć_ – to count, _rzepa_ – turnip): "one who counts turnips".
 
 The name was picked due to the author's fondness of Karkonosze and the legend itself, as well as a loose reference to the project, which, while doesn't exactly count anything, is close enough to be named this way.
