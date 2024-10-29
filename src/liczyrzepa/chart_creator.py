@@ -8,6 +8,7 @@ class ChartCreator:
         times = history.get_times()
         values = history.get_values()
         fig, ax = plt.subplots(figsize=(16, 9))
+        ax.grid(visible=True, which="both")
         plt.plot(
             times,
             values,
