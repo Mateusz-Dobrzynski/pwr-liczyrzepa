@@ -26,8 +26,6 @@ def main():
         try:
             history.create_new_price_record()
             print(history.records[-1].value)
-            if args.file:
-                history.save_to_file(args.file)
         except:
             print(
                 "ERROR: Failed to scrape current value. Please verify your url and xpath"
